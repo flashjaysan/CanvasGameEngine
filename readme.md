@@ -240,6 +240,58 @@ const newVector = CGE.vectorNormalize(vector);
 
 **Remarque :** La méthode ne modifie pas le vecteur d'origine mais renvoie un nouveau vecteur.
 
+## Méthodes utilitaires
+
+### Forcer une valeur dans un intervalle
+
+Utilisez la méthode `CGE.clamp` pour réduire une valeur à un intervalle.
+
+```js
+const newValue = CGE.clamp(valeur, minimum, maximum);
+```
+
+Paramètres :
+
+- `valeur` : La valeur à restreindre.
+- `minimum` : La valeur minimale que `valeur` ne doit pas dépasser.
+- `maximum` : La valeur maximale que `valeur` ne doit pas dépasser.
+
+Valeur de retour : Un nombre définit comme suit :
+
+  - `valeur` si `valeur` est comprise dans l'intervalle [`minimum`, `maximum`].
+  - `minimum` si `valeur` est inférieure à `minimum`.
+  - `maximum` si `valeur` est supérieur à `maximum`.
+
+**Remarque :** La propriété initiale n'est pas modifiée. Si c'est ce que vous souhaitez faire, affectez le résultat de cette méthode à la propriété initiale.
+
+### Conversion radians vers degrés
+
+Utilisez la méthode `CGE.radiansToDegrees` pour convertir une valeur exprimée en radians vers une valeur exprimée en degrés.
+
+```js
+const degrees = CGE.radiansToDegrees(valeur);
+```
+
+Paramètre :
+
+- `valeur` : La valeur en radians à convertir.
+
+Valeur de retour : Un nombre représentant la conversion de `valeur` en degrés.
+
+### Conversion degrés vers radians
+
+Utilisez la méthode `CGE.degreesToRadians` pour convertir une valeur exprimée en degrés vers une valeur exprimée en radians.
+
+```js
+const degrees = CGE.degreesToRadians(valeur);
+```
+
+Paramètre :
+
+- `valeur` : La valeur en degrés à convertir.
+
+Valeur de retour : Un nombre représentant la conversion de `valeur` en radians.
+
 ## Interpolation
 
 Utilisez la méthode `CGE.lerp` pour effectuer une interpolation linéaire.
@@ -264,7 +316,7 @@ const median = CGE.lerp(0, 100, 0.5);
 
 ### Etat du contexte
 
-#### Sauvegarde du contexte de dessin
+#### Sauvegarde du contexte
 
 Utilisez la méthode `CGE.drawSaveContext` pour sauvegarder l'état du contexte de dessin. Vous pouvez ainsi sauvegarder la couleur de remplissage, la couleur de trait et son épaisseur ainsi que toute modification du contexte.
 
@@ -274,7 +326,7 @@ CGE.drawSaveContext();
 
 **Remarque :** Une fois vos manipulations terminées, n'oubliez pas de restaurer le contexte précédent.
 
-#### Restauration du contexte de dessin précédent
+#### Restauration du contexte précédent
 
 Utilisez la méthode `CGE.drawRestoreContext` pour restaurer l'état précédent du contexte de dessin.
 
@@ -292,7 +344,7 @@ CGE.drawSetFillColor(couleur);
 
 Paramètre :
 
-- `couleur` : Une chaine représentant l'une des [couleurs prédéfinies](https://htmlcolorcodes.com/fr/noms-de-couleur/) ou un nombre hexadécimal précédé du signe `#` représentant une couleur RGB. Requis. Défaut `'black'` (`#000`).
+- `couleur` : Une chaine représentant l'une des [couleurs prédéfinies](https://htmlcolorcodes.com/fr/noms-de-couleur/), un nombre hexadécimal précédé du signe `#` représentant une couleur RGB ou l'une des fonctions `rgb`, `rgba`, `hsl` ou `hsla`. Requis. Défaut `'black'` (`#000`).
 
 #### Récupérer la couleur de remplissage
 
@@ -314,7 +366,7 @@ CGE.drawSetLineColor(couleur);
 
 Paramètre :
 
-- `couleur` : Une chaine représentant l'une des [couleurs prédéfinies](https://htmlcolorcodes.com/fr/noms-de-couleur/) ou un nombre hexadécimal précédé du signe `#` représentant une couleur RGB. Requis. Défaut `'black'` (`#000`).
+- `couleur` : Une chaine représentant l'une des [couleurs prédéfinies](https://htmlcolorcodes.com/fr/noms-de-couleur/), un nombre hexadécimal précédé du signe `#` représentant une couleur RGB ou l'une des fonctions `rgb`, `rgba`, `hsl` ou `hsla`. Requis. Défaut `'black'` (`#000`).
 
 #### Récupérer la couleur de contour
 
@@ -348,27 +400,13 @@ const currentLineWidth = CGE.drawGetLineWidth();
 
 Valeur de retour : Un nombre représentant l'épaisseur de trait actuel.
 
-#### Définir la police de caractères
+#### Effacer le canvas
 
-Utilisez la méthode `CGE.drawSetFont` pour définir la police de caractères.
-
-```js
-CGE.drawSetFont(police);
-```
-
-Paramètre :
-
-- `police` : Un chaine représentant la police de caractères. Requis. Défaut `'10px sans-serif'`. La chaine est basée sur le format de [font CSS](https://developer.mozilla.org/fr/docs/Web/CSS/font).
-
-#### Récupérer la police de caractères
-
-Utilisez la méthode `CGE.drawGetFont` pour récupérer la police de caractères actuelle.
+Par défaut, le moteur efface automatiquement le canevas à chaque affichage. Vous pouvez toutefois utiliser la méthode `CGE.clearScreen` pour effacer le canevas manuellement.
 
 ```js
-const currentFont = CGE.drawGetFont();
+CGE.clearScreen();
 ```
-
-Valeur de retour : Une chaine représentant la police de caractères actuel.
 
 ### Formes géométriques
 
@@ -424,33 +462,77 @@ Paramètres :
 - `coinSuperieurGauche` : un vecteur représentant la position du coin supérieur gauche du rectangle. Requis.
 - `taille` : un vecteur représentant les dimensions du rectangle. Requis.
 
+
+
+
+
+
+
+
+#### Triangle plein
+
+La méthode `CGE.drawTriangleFill` dessine un triangle plein (en utilisant la couleur de remplissage actuelle).
+
+```js
+CGE.drawTriangleFill(point1, point2, point3);
+```
+
+Paramètres :
+
+- `point1` : Un vecteur représentant la position du premier point du triangle. Requis.
+- `point2` : Un vecteur représentant la position du deuxième point du triangle. Requis.
+- `point3` : Un vecteur représentant la position du troisième point du triangle. Requis.
+
+#### Contour de triangle
+
+La méthode `CGE.drawTriangleOutline` dessine un contour de triangle (en utilisant la couleur de contour et l'épaisseur de trait actuels).
+
+```js
+CGE.drawTriangleOutline(point1, point2, point3);
+```
+
+Paramètres :
+
+- `point1` : Un vecteur représentant la position du premier point du triangle. Requis.
+- `point2` : Un vecteur représentant la position du deuxième point du triangle. Requis.
+- `point3` : Un vecteur représentant la position du troisième point du triangle. Requis.
+
+#### Ligne
+
+Utilisez la méthode `CGE.drawLine` pour afficher un segment de droite.
+
+```js
+CGE.drawLine(point1, point2);
+```
+
+Paramètres :
+
+- `point1` : Un vecteur représentant la position du premier point du segment.
+- `point2` : Un vecteur représentant la position du second point du segment.
+
 ### Texte
 
-#### Affichage de texte
+#### Définir la police de caractères
 
-Utilisez la méthode `CGE.drawTextFill` pour afficher du texte (en utilisant la couleur de remplissage actuelle).
-
-```js
-CGE.drawTextFill(position, texte);
-```
-
-Paramètres :
-
-- `position` : un vecteur représentant la position du point d'origine du texte. Requis.
-- `texte` : une chaine représentant le texte à afficher. Requis.
-
-#### Affichage de contour de texte
-
-Utilisez la méthode `CGE.drawTextOutline` pour afficher un contour de texte (en utilisant la couleur de contour et l'épaisseur de trait actuels).
+Utilisez la méthode `CGE.drawSetFont` pour définir la police de caractères.
 
 ```js
-CGE.drawTextOutline(position, texte);
+CGE.drawSetFont(police);
 ```
 
-Paramètres :
+Paramètre :
 
-- `position` : un vecteur représentant la position du point d'origine du texte. Requis.
-- `texte` : une chaine représentant le texte à afficher. Requis.
+- `police` : Un chaine représentant la police de caractères. Requis. Défaut `'10px sans-serif'`. La chaine est basée sur le format de [font CSS](https://developer.mozilla.org/fr/docs/Web/CSS/font).
+
+#### Récupérer la police de caractères
+
+Utilisez la méthode `CGE.drawGetFont` pour récupérer la police de caractères actuelle.
+
+```js
+const currentFont = CGE.drawGetFont();
+```
+
+Valeur de retour : Une chaine représentant la police de caractères actuel.
 
 #### Alignement horizontal du texte
 
@@ -487,17 +569,100 @@ Paramètres :
   - `'ideographic'` : La ligne de base du texte est la ligne de base idéographique ; c'est le bas du corps des caractères, si le corps principal des caractères fait saillie en dessous de la ligne de base alphabétique.
   - `'bottom'` : La ligne de base du texte est le bas du cadre. Cela diffère de ligne de base idéographique en ce que la ligne de base idéographique ne prend pas en considération les jambages.
 
+#### Affichage de texte
+
+Utilisez la méthode `CGE.drawTextFill` pour afficher du texte (en utilisant la couleur de remplissage actuelle).
+
+```js
+CGE.drawTextFill(position, texte);
+```
+
+Paramètres :
+
+- `position` : un vecteur représentant la position du point d'origine du texte. Requis.
+- `texte` : une chaine représentant le texte à afficher. Requis.
+
+#### Affichage de contour de texte
+
+Utilisez la méthode `CGE.drawTextOutline` pour afficher un contour de texte (en utilisant la couleur de contour et l'épaisseur de trait actuels).
+
+```js
+CGE.drawTextOutline(position, texte);
+```
+
+Paramètres :
+
+- `position` : un vecteur représentant la position du point d'origine du texte. Requis.
+- `texte` : une chaine représentant le texte à afficher. Requis.
+
+### Images
+
+#### Charger une image
+
+Utilisez la méthode `CGE.loadImage` pour charger une image.
+
+```js
+const image = CGE.loadImage(chemin);
+```
+
+Paramètre :
+
+- `chemin` : Le chemin vers l'image à charger.
+
+Valeur de retour : L'image chargée.
+
+#### Afficher une image
+
+Utilisez la méthode `CGE.drawImage` pour afficher une image.
+
+```js
+CGE.drawImage(position, image);
+```
+
+Paramètres :
+
+- `position` : Un vecteur représentant la position de l'image.
+- `image` : L'image à afficher.
 
 
+#### Afficher une image avec un facteur d'échelle
 
+Utilisez la méthode `CGE.drawImageScaled` pour afficher une image avec un facteur d'échelle.
 
+```js
+CGE.drawImageScaled(position, image, echelle);
+```
 
+Paramètres :
 
+- `position` : Un vecteur représentant la position de l'image.
+- `image` : L'image à afficher.
+- `echelle` : Un vecteur représentant le facteur d'échelle horizontale et vertical.
 
+## Créer un motif à partir d'une image
 
+Utilisez la méthode `CGE.setFillImagePattern` pour définir une image en tant que motif.
 
+```js
+CGE.drawSetFillImagePattern(image, mode);
+```
 
+Paramètre :
 
+- `image` : L'image à utiliser en tant que motif.
+- `mode` : Une chaine représentant le mode de répétition du motif. Utilisez l'une des options suivantes :
+  - `'no_repeat'` : Le motif ne se répète pas.
+  - `repeat` : Le motif se répète horizontalement et verticalement.
+  - `repeat-x` : Le motif se répète uniquement horizontalement.
+  - `repeat-y` : Le motif se répète uniquement verticalement.
+
+Une fois le motif créé, attribuez le à la couleur de remplissage avec la méthode `CGE.drawSetFillColor`.
+
+```js
+context.fillStyle = motif;
+```
+
+Il ne vous reste plus qu'à dessiner des formes.
 
 
 
