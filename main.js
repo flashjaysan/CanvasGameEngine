@@ -130,6 +130,7 @@ const CGE = {
     },
 
 
+    // horizontalAlignment == 'left' | 'right' | 'center' | 'start' | 'end'
     drawSetFontHorizontalAlignment(horizontalAlignment) {
         this.context.textAlign = horizontalAlignment;
     },
@@ -140,6 +141,7 @@ const CGE = {
     },
 
 
+    // verticalAlignment == 'top' | 'hanging' | 'middle' | 'alphabetic' | 'ideographic' | 'bottom'
     drawSetFontVerticalAlignment(verticalAlignment) {
         this.context.textBaseline = verticalAlignment;
     },
@@ -213,8 +215,13 @@ const CGE = {
     },
 
 
-    drawText(position, text) {
+    drawTextFill(position, text) {
         this.context.fillText(text, position.x, position.y);
+    },
+
+
+    drawTextOutline(position, text) {
+        this.context.strokeText(text, position.x, position.y);
     },
 
 
@@ -377,7 +384,7 @@ const gameObject = new CGE.GameObject();
 gameObject.position = new CGE.Vector(CGE.canvasWidth / 2, CGE.canvasHeight / 2);
 gameObject.size = new CGE.Vector(100, 50);
 gameObject.draw = function() {
-    CGE.drawText(this.position, 'Hello, world!');
+    CGE.drawTextOutline(this.position, 'Hello, world!');
 };
 CGE.addGameObject(gameObject);
 CGE.startGame();

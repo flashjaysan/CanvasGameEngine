@@ -262,6 +262,70 @@ const median = CGE.lerp(0, 100, 0.5);
 
 ## Méthodes de dessin
 
+### Sauvegarde du contexte de dessin
+
+Utilisez la méthode `CGE.drawSaveContext` pour sauvegarder l'état du contexte de dessin. Vous pouvez ainsi sauvegarder la couleur de remplissage, la couleur de trait et son épaisseur ainsi que toute modification du contexte.
+
+```js
+CGE.drawSaveContext();
+```
+
+**Remarque :** Une fois vos manipulations terminées, n'oubliez pas de restaurer le contexte précédent.
+
+### Restauration du contexte de dessin précédent
+
+Utilisez la méthode `CGE.drawRestoreContext` pour restaurer l'état précédent du contexte de dessin.
+
+```js
+CGE.drawRestoreContext();
+```
+
+### Modifier la couleur de remplissage des formes
+
+Utilisez la méthode `CGE.drawSetFillColor` pour définir la couleur de remplissage des formes. La couleur par défaut est noire `#000`.
+
+```js
+CGE.drawSetFillColor(couleur);
+```
+
+Paramètre :
+
+- `couleur` : Une chaine représentant l'une des [couleurs prédéfinies](https://htmlcolorcodes.com/fr/noms-de-couleur/) ou un nombre hexadécimal précédé du signe `#` représentant une couleur RGB. Requis. Défaut `'black'` (`#000`).
+
+### récupérer la couleur de remplissage des formes
+
+Utilisez la méthode `CGE.drawGetFillColor` pour récupérer la couleur actuelle de remplissage des formes.
+
+```js
+const currentFillColor = CGE.drawGetFillColor();
+```
+
+Renvoie : Une chaine représentant l'une des [couleurs prédéfinies](https://htmlcolorcodes.com/fr/noms-de-couleur/) ou un nombre hexadécimal précédé du signe `#` représentant une couleur RGB.
+
+### Modifier la couleur de contour des formes
+
+Utilisez la méthode `CGE.drawSetLineColor` pour définir la couleur de contour des formes. La couleur par défaut est noire `#000`.
+
+```js
+CGE.drawSetLineColor(couleur);
+```
+
+Paramètre :
+
+- `couleur` : Une chaine représentant l'une des [couleurs prédéfinies](https://htmlcolorcodes.com/fr/noms-de-couleur/) ou un nombre hexadécimal précédé du signe `#` représentant une couleur RGB. Requis. Défaut `'black'` (`#000`).
+
+### récupérer la couleur de contour des formes
+
+Utilisez la méthode `CGE.drawGetLineColor` pour définir la couleur actuelle de contour des formes.
+
+```js
+const currentLineColor = CGE.drawGetLineColor();
+```
+
+Paramètre :
+
+- `couleur` : Une chaine représentant l'une des [couleurs prédéfinies](https://htmlcolorcodes.com/fr/noms-de-couleur/) ou un nombre hexadécimal précédé du signe `#` représentant une couleur RGB.
+
 ### Cercle plein
 
 La méthode `CGE.drawCircleFill` dessine un cercle plein (en utilisant la couleur de remplissage actuelle).
@@ -275,7 +339,7 @@ Paramètres :
 - `centre` : un vecteur représentant la position du centre du cercle. Requis.
 - `rayon` : le rayon du cercle. Requis.
 
-### contour de cercle
+### Contour de cercle
 
 La méthode `CGE.drawCircleOutline` dessine un contour de cercle (en utilisant la couleur de contour et l'épaisseur de trait actuels).
 
@@ -287,6 +351,105 @@ Paramètres :
 
 - `centre` : un vecteur représentant la position du centre du cercle. Requis.
 - `rayon` : le rayon du cercle. Requis.
+
+### Rectangle plein
+
+La méthode `CGE.drawRectangleFill` dessine un rectangle plein (en utilisant la couleur de remplissage actuelle).
+
+```js
+CGE.drawRectangleFill(coinSuperieurGauche, taille);
+```
+
+Paramètres :
+
+- `coinSuperieurGauche` : un vecteur représentant la position du coin supérieur gauche du rectangle. Requis.
+- `taille` : un vecteur représentant les dimensions du rectangle. Requis.
+
+### Contour de rectangle
+
+La méthode `CGE.drawRectangleOutline` dessine un contour de rectangle (en utilisant la couleur de contour et l'épaisseur de trait actuels).
+
+```js
+CGE.drawRectangleOutline(coinSuperieurGauche, taille);
+```
+
+Paramètres :
+
+- `coinSuperieurGauche` : un vecteur représentant la position du coin supérieur gauche du rectangle. Requis.
+- `taille` : un vecteur représentant les dimensions du rectangle. Requis.
+
+### Texte
+
+#### Définir la police d'affichage
+
+
+
+
+
+
+
+#### Affichage de texte
+
+Utilisez la méthode `CGE.drawTextFill` pour afficher du texte (en utilisant la couleur de remplissage actuelle).
+
+```js
+CGE.drawTextFill(position, texte);
+```
+
+Paramètres :
+
+- `position` : un vecteur représentant la position du point d'origine du texte. Requis.
+- `texte` : une chaine représentant le texte à afficher. Requis.
+
+#### Affichage de contour de texte
+
+Utilisez la méthode `CGE.drawTextOutline` pour afficher un contour de texte (en utilisant la couleur de contour et l'épaisseur de trait actuels).
+
+```js
+CGE.drawTextOutline(position, texte);
+```
+
+Paramètres :
+
+- `position` : un vecteur représentant la position du point d'origine du texte. Requis.
+- `texte` : une chaine représentant le texte à afficher. Requis.
+
+#### Alignement horizontal du texte
+
+Utilisez la méthode `CGE.drawSetFontHorizontalAlignment` pour définir le type d'alignement horizontal des textes à afficher.
+
+```js
+CGE.drawSetFontHorizontalAlignment(alignementHorizontal);
+```
+
+Paramètres :
+
+- `horizontalAlignment` : une chaine représentant l'alignement horizontal du texte. Requis. Défaut `'start'`. Passez une des valeurs suivantes :
+  - `'left'`: Le texte est aligné à gauche du point d'origine.
+  - `'right'` : Le texte est aligné à droite du point d'origine.
+  - `'center'` : Le texte est centré sur le point d'origine.
+  - `'start'` : Le texte est aligné au début normal de la ligne (aligné à gauche pour les systèmes d'écriture de gauche à droite, aligné à droite pour les systèmes d'écriture de droite à gauche).
+  - `'end'` : Le texte est aligné à la fin normale de la ligne (aligné à droite pour les systèmes d'écriture de gauche à droite, aligné à gauche pour les systèmes d'écriture de droite à gauche).
+
+#### Alignement vertical du texte
+
+Utilisez la méthode `CGE.drawSetFontVerticalAlignment` pour définir le type d'alignement vertical des textes à afficher.
+
+```js
+CGE.drawSetFontVerticalAlignment(alignementVertical);
+```
+
+Paramètres :
+
+- `verticalAlignment` : une chaine représentant l'alignement vertical du texte. Requis. Défaut `'alphabetic'`. Passez une des valeurs suivantes :
+  - `'top'` : La ligne de base du texte est le haut du cadratin.
+  - `'hanging'` : La ligne de base du texte est la ligne de base supérieure.
+  - `'middle'` : La ligne de base du texte est le milieu du cadratin.
+  - `'alphabetic'` : La ligne de base du texte est la ligne de base normale alphabétique.
+  - `'ideographic'` : La ligne de base du texte est la ligne de base idéographique ; c'est le bas du corps des caractères, si le corps principal des caractères fait saillie en dessous de la ligne de base alphabétique.
+  - `'bottom'` : La ligne de base du texte est le bas du cadre. Cela diffère de ligne de base idéographique en ce que la ligne de base idéographique ne prend pas en considération les jambages.
+
+
 
 
 
