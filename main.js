@@ -370,15 +370,6 @@ const CGE = {
 };
 
 
-
-
-
-
-
-
-
-
 /// testing the engine
-CGE.init(640, 360);
-console.log(typeof CGE.drawGetLineWidth());
+
 

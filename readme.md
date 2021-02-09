@@ -52,6 +52,10 @@ Créez un fichier `main.js` et placez en tête du fichier le code source du mote
 
 A la fin du fichier `main.js`, placez votre programme.
 
+### Démos
+
+Le dossier `demos` contient plusieurs fichiers de démonstration des fonctionnalités du moteur. Copiez le contenu d'un de ces fichiers à la fin de votre fichier `main.js` après le code source du moteur. Vous pouvez ensuite ouvrir le fichier `index.html` dans votre navigateur.
+
 ### La méthode init
 
 Commencez par appeler la méthode `init`. Cette méthode crée un élément `canvas` et l'ajoute à la fin du document HTML.
