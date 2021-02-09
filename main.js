@@ -149,11 +149,11 @@ const CGE = {
     },
 
 
-    drawCircleFill(x, y, radius) {
+    drawCircleFill(center, radius) {
         this.context.beginPath();
         this.context.arc(
-          x,
-          y,
+          center.x,
+          center.y,
           radius,
           0,
           2 * Math.PI
@@ -162,11 +162,11 @@ const CGE = {
     },
 
 
-    drawCircleOutline(x, y, radius) {
+    drawCircleOutline(center, radius) {
         this.context.beginPath();
         this.context.arc(
-          x,
-          y,
+          center.x,
+          center.y,
           radius,
           0,
           2 * Math.PI
@@ -175,55 +175,55 @@ const CGE = {
     },
 
 
-    drawRectangleFill(x, y, width, height) {
-        this.context.fillRect(x, y, width, height);
+    drawRectangleFill(topLeftCorner, size) {
+        this.context.fillRect(topLeftCorner.x, topLeftCorner.y, size.x, size.y);
     },
 
 
-    drawRectangleOutline(x, y, width, height) {
-        this.context.strokeRect(x, y, width, height);
+    drawRectangleOutline(topLeftCorner, size) {
+        this.context.strokeRect(topLeftCorner.x, topLeftCorner.y, size.x, size.y);
     },
 
 
-    drawLine(x1, y1, x2, y2) {
+    drawLine(point1, point2) {
         this.context.beginPath();
-        this.context.moveTo(x1, y1);
-        this.context.lineTo(x2, y2);
+        this.context.moveTo(point1.x, point1.y);
+        this.context.lineTo(point2.x, point2.y);
         this.context.stroke();
     },
 
 
-    drawTriangleFill(x1, y1, x2, y2, x3, y3) {
+    drawTriangleFill(point1, point2, point3) {
         this.context.beginPath();
-        this.context.moveTo(x1, y1);
-        this.context.lineTo(x2, y2);
-        this.context.lineTo(x3, y3);
+        this.context.moveTo(point1.x, point1.y);
+        this.context.lineTo(point2.x, point2.y);
+        this.context.lineTo(point3.x, point3.y);
         this.context.fill();
     },
 
 
-    drawTriangleOutline(x1, y1, x2, y2, x3, y3) {
+    drawTriangleOutline(point1, point2, point3) {
         this.context.beginPath();
-        this.context.moveTo(x1, y1);
-        this.context.lineTo(x2, y2);
-        this.context.lineTo(x3, y3);
+        this.context.moveTo(point1.x, point1.y);
+        this.context.lineTo(point2.x, point2.y);
+        this.context.lineTo(point3.x, point3.y);
         this.context.closePath();
         this.context.stroke();
     },
 
 
-    drawText(x, y, text) {
-        this.context.fillText(text, x, y);
+    drawText(position, text) {
+        this.context.fillText(text, position.x, position.y);
     },
 
 
-    drawImage(x, y, image) {
-        context.drawImage(image, x, y);
+    drawImage(position, image) {
+        context.drawImage(image, position.x, position.y);
     },
 
 
-    drawImageScaled(x, y, image, xScale, yScale) {
-        context.drawImage(image, coin_supérieur_gauche_x, coin_supérieur_gauche_y, image.width / ratio_horizontal, image.width / ratio_vertical);
+    drawImageScaled(position, image, scale) {
+        context.drawImage(image, position.x, position.y, image.width / scale.x, image.width / scale.y);
     },
 
 
@@ -374,7 +374,7 @@ dummyGameObject.update = function(deltaTime) {
     }
 };
 dummyGameObject.draw = function() {
-    CGE.drawCircleFill(this.position.x, this.position.y, 50);
+    CGE.drawCircleFill(this.position, 50);
 };
 CGE.addGameObject(dummyGameObject);
 /*

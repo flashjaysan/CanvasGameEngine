@@ -245,20 +245,44 @@ const newVector = CGE.vectorNormalize(vector);
 Utilisez la méthode `CGE.lerp` pour effectuer une interpolation linéaire.
 
 ```js
-const value = CGE.lerp(min, max, percentage);
+const value = CGE.lerp(min, max, pourcentage);
 ```
 
 Paramètres :
 
 - `min` : la valeur minimale de l'intervalle. Requis.
 - `max` : la valeur maximale de l'intervalle. Requis.
-- `percentage` : le pourcentage à calculer dans l'intervalle. Requis.
+- `pourcentage` : le pourcentage à calculer dans l'intervalle. Requis.
 
 Exemples :
 
 ```js
 const median = CGE.lerp(0, 100, 0.5);
 ```
+
+## Méthodes de dessin
+
+La méthode `CGE.drawCircleFill` .
+
+```js
+CGE.drawCircleFill(x, y, rayon);
+```
+
+Paramètres :
+
+- `x` : la position horizontale du centre du cercle. Requis.
+- `y` : la position verticale du centre du cercle. Requis.
+- `rayon` : le ayon du cercle. Requis.
+
+
+
+
+
+
+
+
+
+
 
 
 
