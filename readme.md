@@ -16,9 +16,9 @@ Les objets de jeu n'ont au départ que des méthodes vides `update` et `draw` et
 
 ## Fonctionnement
 
-- La méthode `init` crée un canvas et l'ajoute au document HTML.
+- La méthode `init` crée un élément `canvas` et l'ajoute au document HTML.
 - La méthode `startGame` lance la boucle de jeu.
-- La boucle de jeu calcule le `deltaTime` (en secondes), appelle les méthodes `update` et `draw` puis demande au navigateur de rappeler cette méthode lors du prochain rafraichissement d'écran.
+- La boucle de jeu calcule le `deltaTime` (en secondes), appelle les méthodes `update` (en passant `deltaTime`) et `draw` puis demande au navigateur de rappeler cette méthode lors du prochain rafraichissement d'écran.
 - La méthode `update` parcourt tous les objets de jeu contenus dans le tableau `CGE.gameObjects` et appelle leur méthode `update` en passant le `deltaTime`.
 - La méthode `draw` parcourt tous les objets de jeu contenus dans le tableau `CGE.gameObjects` et appelle leur méthode `draw`.
 
@@ -240,9 +240,25 @@ const newVector = CGE.vectorNormalize(vector);
 
 **Remarque :** La méthode ne modifie pas le vecteur d'origine mais renvoie un nouveau vecteur.
 
+## Interpolation
 
+Utilisez la méthode `CGE.lerp` pour effectuer une interpolation linéaire.
 
+```js
+const value = CGE.lerp(min, max, percentage);
+```
 
+Paramètres :
+
+- `min` : la valeur minimale de l'intervalle. Requis.
+- `max` : la valeur maximale de l'intervalle. Requis.
+- `percentage` : le pourcentage à calculer dans l'intervalle. Requis.
+
+Exemples :
+
+```js
+const median = CGE.lerp(0, 100, 0.5);
+```
 
 
 
