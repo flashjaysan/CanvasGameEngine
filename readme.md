@@ -262,19 +262,31 @@ const median = CGE.lerp(0, 100, 0.5);
 
 ## Méthodes de dessin
 
-La méthode `CGE.drawCircleFill` .
+### Cercle plein
+
+La méthode `CGE.drawCircleFill` dessine un cercle plein (en utilisant la couleur de remplissage actuelle).
 
 ```js
-CGE.drawCircleFill(x, y, rayon);
+CGE.drawCircleFill(centre, rayon);
 ```
 
 Paramètres :
 
-- `x` : la position horizontale du centre du cercle. Requis.
-- `y` : la position verticale du centre du cercle. Requis.
-- `rayon` : le ayon du cercle. Requis.
+- `centre` : un vecteur représentant la position du centre du cercle. Requis.
+- `rayon` : le rayon du cercle. Requis.
 
+### contour de cercle
 
+La méthode `CGE.drawCircleOutline` dessine un contour de cercle (en utilisant la couleur de contour et l'épaisseur de trait actuels).
+
+```js
+CGE.drawCircleOutline(centre, rayon);
+```
+
+Paramètres :
+
+- `centre` : un vecteur représentant la position du centre du cercle. Requis.
+- `rayon` : le rayon du cercle. Requis.
 
 
 

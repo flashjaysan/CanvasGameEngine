@@ -19,9 +19,20 @@ const CGE = {
 
     // calls update on all game objects
     update(deltaTime) {
+        this.gameObjects.sort((gameObject1, gameObject2) => gameObject2.depth - gameObject1.depth);
         for (const gameObject of this.gameObjects)
         {
             gameObject.update(deltaTime);
+        }
+    },
+
+
+    // calls draw on all game objects
+    draw() {
+        this.clearScreen();
+        for (const gameObject of this.gameObjects)
+        {
+            gameObject.draw();
         }
     },
 
@@ -32,21 +43,11 @@ const CGE = {
     },
 
 
-    // calls draw on all game objects
-    draw() {
-        for (const gameObject of this.gameObjects)
-        {
-            gameObject.draw();
-        }
-    },
-
-
     // main game loop
     gameLoop(currentTimestamp) {
         const deltaTime = (currentTimestamp - this.previousTimestamp) / 1000;
         this.previousTimestamp = currentTimestamp;
         this.update(deltaTime);
-        this.clearScreen();
         this.draw();
         window.requestAnimationFrame(() => this.gameLoop());
     },
@@ -99,22 +100,22 @@ const CGE = {
     },
 
 
-    drawSetStrokeColor(color) {
+    drawSetLineColor(color) {
         this.context.strokeStyle = color;
     },
 
 
-    drawGetStrokeColor(color) {
+    drawGetLineColor(color) {
         return this.context.strokeStyle;
     },
 
 
-    drawSetStrokeWidth(lineWidth) {
+    drawSetLineWidth(lineWidth) {
         this.context.lineWidth = lineWidth;
     },
 
 
-    drawGetStrokeWidth() {
+    drawGetLineWidth() {
         return this.context.lineWidth;
     },
 
@@ -302,14 +303,20 @@ const CGE = {
 
 
     vectorFromPolar(polar) {
-        return new this.Vector(polar.distance * Math.cos(this.degreesToRadians(polar.angle)), polar.distance * Math.sin(this.degreesToRadians(polar.angle)));
+        return new this.Vector(
+            polar.distance * Math.cos(this.degreesToRadians(polar.angle)),
+            polar.distance * Math.sin(this.degreesToRadians(polar.angle))
+            );
     },
 
 
     polarFromVector(vector) {
         if (vector.x !== 0 && vector.y !== 0)
         {
-            return new this.Polar(Math.sqrt(vector.x * vector.x + vector.y * vector.y), this.radiansToDegrees(Math.atan2(vector.y, vector.x)));
+            return new this.Polar(
+                Math.sqrt(vector.x * vector.x + vector.y * vector.y),
+                this.radiansToDegrees(Math.atan2(vector.y, vector.x))
+                );
         }
         else
         {
@@ -325,6 +332,26 @@ const CGE = {
 
     radiansToDegrees(radians) {
         return radians * 180 / Math.PI;
+    },
+
+
+    random(number = 1) {
+        return number * Math.random();
+    },
+
+
+    randomInteger(number = 1) {
+        return Math.floor(number * Math.random());
+    },
+
+
+    randomRange(minimum, maximum) {
+        return this.random(maximum - minimum) + minimum;
+    },
+
+
+    randomIntegerRange(minimum, maximum) {
+        return Math.floor(this.randomRange(minimum, maximum));
     },
 
 
@@ -346,43 +373,11 @@ const CGE = {
 
 /// testing the engine
 CGE.init(640, 360);
-
-const dummyGameObject = new CGE.GameObject();
-dummyGameObject.position = new CGE.Vector(30, 30);
-dummyGameObject.velocity = new CGE.Vector(2, 3);
-dummyGameObject.update = function(deltaTime) {
-    this.position = CGE.vectorAdd(this.position, this.velocity);
-    if (this.position.x < 0)
-    {
-        this.position.x = 0;
-        this.velocity.x *= -1;
-    }
-    if ( this.position.x > CGE.canvasWidth)
-    {
-        this.position.x = CGE.canvasWidth;
-        this.velocity.x *= -1;
-    }
-    if (this.position.y < 0)
-    {
-        this.position.y = 0;
-        this.velocity.y *= -1;
-    }
-    if (this.position.y > CGE.canvasHeight)
-    {
-        this.position.y = CGE.canvasHeight;
-        this.velocity.y *= -1;
-    }
+const gameObject = new CGE.GameObject();
+gameObject.position = new CGE.Vector(CGE.canvasWidth / 2, CGE.canvasHeight / 2);
+gameObject.size = new CGE.Vector(100, 50);
+gameObject.draw = function() {
+    CGE.drawText(this.position, 'Hello, world!');
 };
-dummyGameObject.draw = function() {
-    CGE.drawCircleFill(this.position, 50);
-};
-CGE.addGameObject(dummyGameObject);
-/*
-const dummyGameObject2 = new CGE.GameObject();
-dummyGameObject2.position = new CGE.Vector(100, 100);
-dummyGameObject2.draw = function() {
-    CGE.drawRectangleFill(this.position.x, this.position.y, 50, 50);
-};
-CGE.addGameObject(dummyGameObject2);
-*/
+CGE.addGameObject(gameObject);
 CGE.startGame();
