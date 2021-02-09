@@ -262,7 +262,9 @@ const median = CGE.lerp(0, 100, 0.5);
 
 ## Méthodes de dessin
 
-### Sauvegarde du contexte de dessin
+### Etat du contexte
+
+#### Sauvegarde du contexte de dessin
 
 Utilisez la méthode `CGE.drawSaveContext` pour sauvegarder l'état du contexte de dessin. Vous pouvez ainsi sauvegarder la couleur de remplissage, la couleur de trait et son épaisseur ainsi que toute modification du contexte.
 
@@ -272,7 +274,7 @@ CGE.drawSaveContext();
 
 **Remarque :** Une fois vos manipulations terminées, n'oubliez pas de restaurer le contexte précédent.
 
-### Restauration du contexte de dessin précédent
+#### Restauration du contexte de dessin précédent
 
 Utilisez la méthode `CGE.drawRestoreContext` pour restaurer l'état précédent du contexte de dessin.
 
@@ -280,9 +282,9 @@ Utilisez la méthode `CGE.drawRestoreContext` pour restaurer l'état précédent
 CGE.drawRestoreContext();
 ```
 
-### Modifier la couleur de remplissage des formes
+#### Définir la couleur de remplissage
 
-Utilisez la méthode `CGE.drawSetFillColor` pour définir la couleur de remplissage des formes. La couleur par défaut est noire `#000`.
+Utilisez la méthode `CGE.drawSetFillColor` pour définir la couleur de remplissage des formes.
 
 ```js
 CGE.drawSetFillColor(couleur);
@@ -292,7 +294,7 @@ Paramètre :
 
 - `couleur` : Une chaine représentant l'une des [couleurs prédéfinies](https://htmlcolorcodes.com/fr/noms-de-couleur/) ou un nombre hexadécimal précédé du signe `#` représentant une couleur RGB. Requis. Défaut `'black'` (`#000`).
 
-### récupérer la couleur de remplissage des formes
+#### Récupérer la couleur de remplissage
 
 Utilisez la méthode `CGE.drawGetFillColor` pour récupérer la couleur actuelle de remplissage des formes.
 
@@ -300,11 +302,11 @@ Utilisez la méthode `CGE.drawGetFillColor` pour récupérer la couleur actuelle
 const currentFillColor = CGE.drawGetFillColor();
 ```
 
-Renvoie : Une chaine représentant l'une des [couleurs prédéfinies](https://htmlcolorcodes.com/fr/noms-de-couleur/) ou un nombre hexadécimal précédé du signe `#` représentant une couleur RGB.
+Valeur de retour : Une chaine représentant la couleur de remplissage actuelle sous forme d'un nombre hexadécimal précédé du signe `#`.
 
-### Modifier la couleur de contour des formes
+#### Définir la couleur de contour
 
-Utilisez la méthode `CGE.drawSetLineColor` pour définir la couleur de contour des formes. La couleur par défaut est noire `#000`.
+Utilisez la méthode `CGE.drawSetLineColor` pour définir la couleur de contour des formes.
 
 ```js
 CGE.drawSetLineColor(couleur);
@@ -314,19 +316,63 @@ Paramètre :
 
 - `couleur` : Une chaine représentant l'une des [couleurs prédéfinies](https://htmlcolorcodes.com/fr/noms-de-couleur/) ou un nombre hexadécimal précédé du signe `#` représentant une couleur RGB. Requis. Défaut `'black'` (`#000`).
 
-### récupérer la couleur de contour des formes
+#### Récupérer la couleur de contour
 
-Utilisez la méthode `CGE.drawGetLineColor` pour définir la couleur actuelle de contour des formes.
+Utilisez la méthode `CGE.drawGetLineColor` pour récupérer la couleur actuelle de contour des formes.
 
 ```js
 const currentLineColor = CGE.drawGetLineColor();
 ```
 
+Valeur de retour : Une chaine représentant la couleur de contour actuelle sous forme d'un nombre hexadécimal précédé du signe `#`.
+
+#### Définir l'épaisseur de trait
+
+Utilisez la méthode `CGE.drawSetLineWidth` pour définir l'épaisseur de trait.
+
+```js
+CGE.drawSetLineWidth(epaisseur);
+```
+
 Paramètre :
 
-- `couleur` : Une chaine représentant l'une des [couleurs prédéfinies](https://htmlcolorcodes.com/fr/noms-de-couleur/) ou un nombre hexadécimal précédé du signe `#` représentant une couleur RGB.
+- `epaisseur` : Un nombre représentant l'épaisseur de trait. Requis. Défaut `1`.
 
-### Cercle plein
+#### Récupérer l'épaisseur de trait
+
+Utilisez la méthode `CGE.drawGetLineWidth` pour récupérer l'épaisseur de trait actuelle.
+
+```js
+const currentLineWidth = CGE.drawGetLineWidth();
+```
+
+Valeur de retour : Un nombre représentant l'épaisseur de trait actuel.
+
+#### Définir la police de caractères
+
+Utilisez la méthode `CGE.drawSetFont` pour définir la police de caractères.
+
+```js
+CGE.drawSetFont(police);
+```
+
+Paramètre :
+
+- `police` : Un chaine représentant la police de caractères. Requis. Défaut `'10px sans-serif'`. La chaine est basée sur le format de [font CSS](https://developer.mozilla.org/fr/docs/Web/CSS/font).
+
+#### Récupérer la police de caractères
+
+Utilisez la méthode `CGE.drawGetFont` pour récupérer la police de caractères actuelle.
+
+```js
+const currentFont = CGE.drawGetFont();
+```
+
+Valeur de retour : Une chaine représentant la police de caractères actuel.
+
+### Formes géométriques
+
+#### Cercle plein
 
 La méthode `CGE.drawCircleFill` dessine un cercle plein (en utilisant la couleur de remplissage actuelle).
 
@@ -339,7 +385,7 @@ Paramètres :
 - `centre` : un vecteur représentant la position du centre du cercle. Requis.
 - `rayon` : le rayon du cercle. Requis.
 
-### Contour de cercle
+#### Contour de cercle
 
 La méthode `CGE.drawCircleOutline` dessine un contour de cercle (en utilisant la couleur de contour et l'épaisseur de trait actuels).
 
@@ -352,7 +398,7 @@ Paramètres :
 - `centre` : un vecteur représentant la position du centre du cercle. Requis.
 - `rayon` : le rayon du cercle. Requis.
 
-### Rectangle plein
+#### Rectangle plein
 
 La méthode `CGE.drawRectangleFill` dessine un rectangle plein (en utilisant la couleur de remplissage actuelle).
 
@@ -365,7 +411,7 @@ Paramètres :
 - `coinSuperieurGauche` : un vecteur représentant la position du coin supérieur gauche du rectangle. Requis.
 - `taille` : un vecteur représentant les dimensions du rectangle. Requis.
 
-### Contour de rectangle
+#### Contour de rectangle
 
 La méthode `CGE.drawRectangleOutline` dessine un contour de rectangle (en utilisant la couleur de contour et l'épaisseur de trait actuels).
 
@@ -379,14 +425,6 @@ Paramètres :
 - `taille` : un vecteur représentant les dimensions du rectangle. Requis.
 
 ### Texte
-
-#### Définir la police d'affichage
-
-
-
-
-
-
 
 #### Affichage de texte
 
