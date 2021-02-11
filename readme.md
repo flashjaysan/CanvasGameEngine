@@ -8,6 +8,10 @@ Ce projet est une tentative de créer mon propre moteur de jeu vidéo en JavaScr
 
 ## Partis pris
 
+Le moteur ne doit être constitué que d'un seul fichier. Il pourra être importé en tant que module.
+
+Aucune dépendance.
+
 Je souhaite limiter le plus possible les sous objets et favoriser un maximum de fonctions au niveau le plus haut de la lib.
 
 Le moteur est basé sur une boucle de jeu qui appelle en boucle les méthodes `update` et `draw` d'une liste d'objets de jeu.
