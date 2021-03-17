@@ -291,7 +291,7 @@ Valeur de retour : Un nombre représentant la conversion de `valeur` en degrés.
 Utilisez la méthode `CGE.degreesToRadians` pour convertir une valeur exprimée en degrés vers une valeur exprimée en radians.
 
 ```js
-const degrees = CGE.degreesToRadians(valeur);
+const radians = CGE.degreesToRadians(valeur);
 ```
 
 Paramètre :
