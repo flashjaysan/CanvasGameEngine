@@ -524,7 +524,7 @@ CGE.mouseUpListener = function(mouseEvent) {
     }
     
     const canvasBoundingBox = CGE.canvasElement.getBoundingClientRect();
-    CGE.mouse.x = mouseEvent.clientX - canvasBoundingBox.left * (CGE.cancanvasElementvas.width / canvasBoundingBox.width);
+    CGE.mouse.x = mouseEvent.clientX - canvasBoundingBox.left * (CGE.canvasElement.width / canvasBoundingBox.width);
     CGE.mouse.y = mouseEvent.clientY - canvasBoundingBox.top * (CGE.canvasElement.height / canvasBoundingBox.height);
 }
 
