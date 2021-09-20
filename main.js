@@ -226,12 +226,12 @@ CGE.drawTextOutline = function(position, text) {
 
 
 CGE.drawImage = function(position, image) {
-    context.drawImage(image, position.x, position.y);
+    this.context.drawImage(image, position.x, position.y);
 }
 
 
 CGE.drawImageScaled = function(position, image, scale) {
-    context.drawImage(image, position.x, position.y, image.width / scale.x, image.width / scale.y);
+    this.context.drawImage(image, position.x, position.y, image.width / scale.x, image.width / scale.y);
 }
 
 
